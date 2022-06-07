@@ -1,1 +1,0 @@
-# Spielworks-nft-staking-game
