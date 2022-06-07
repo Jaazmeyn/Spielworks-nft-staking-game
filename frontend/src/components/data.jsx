@@ -2,11 +2,12 @@ import React, {useEffect, useState } from 'react';
 
 function Data() {
 
-const [error, setError] = useState(false);
+  const [atomicassets, setAtomicassets] = useState();
+  const [error, setError] = useState(false);
   const [loading, setLoader] = useState(true);
-  // const [useState, setState] = useState(setLoader);
 
-  const url = "https://eos.api.atomicassets.io/docs/#/assets/get_atomicassets_v1_assets";
+  // const url = "https://eos.api.atomicassets.io/docs/#/assets/get_atomicassets_v1_assets";
+  let url = 'https://eos.api.atomicassets.io/atomicassets/v1/assets?collection_name=womplayextra&page=1&limit=100&order=desc&sort=asset_id';
   
   var requestOptions = {
     method: 'GET',
@@ -22,14 +23,13 @@ const loadData = () => {
           throw Error('ERROR')
       };
       
-      return response.text();
+      return response.json();
 
   }).then(data => {
 
        console.log(data, 'request?')
-       data = data;
-      //  setState(data)
-      setLoader(false);
+        setAtomicassets(data)
+       setLoader(false);
 
   }).catch(error => {
       setError(true);
